@@ -1,3 +1,4 @@
+
 import {
   createContext,
   useContext,
@@ -12,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
 
@@ -123,6 +125,11 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Forgot Password
+  const resetPassword = async (email) => {
+    await sendPasswordResetEmail(auth, email);
+  };
+
   // Logout
   const logout = async () => {
     await signOut(auth);
@@ -139,6 +146,7 @@ export function AuthProvider({ children }) {
     login,
     loginWithGoogle,
     register,
+    resetPassword,
     logout,
   };
 

@@ -179,17 +179,7 @@ export default function FAQ() {
             );
           })}
         </div>
-        <Reveal delay={0.2}>
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-slate-200" />
-
-            <span className="text-xs font-medium text-slate-400">
-              আরও কিছু জানতে আমাদের সাথে যোগাযোগ করুন
-            </span>
-
-            <span className="h-px w-8 bg-slate-200" />
-          </div>
-        </Reveal>
+        
         <Reveal delay={0.25}>
           <div className="mt-10 flex flex-col items-center justify-between gap-5 border-y border-indigo-100 bg-white/60 px-5 py-6 backdrop-blur-sm sm:flex-row sm:px-7">
             <div className="text-center sm:text-left">

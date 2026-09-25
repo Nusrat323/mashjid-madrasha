@@ -22,10 +22,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import AdminDonations from "./pages/admin/AdminDonations.jsx";
 import AdminUsers from "./pages/admin/AdminUsers.jsx";
 import AdminNotices from "./pages/admin/AdminNotices.jsx";
-import AdminEvents from "./pages/admin/AdminEvents.jsx";
+
 import AdminMessages from "./pages/admin/AdminMessages.jsx";
 import AdminSettings from "./pages/admin/AdminSettings.jsx";
 import Gallery from "./pages/Gallery.jsx";
+import AdminGallery from "./pages/admin/AdminGallery.jsx";
 
 export default function App() {
   return (
@@ -61,7 +62,7 @@ export default function App() {
                   <Route path="donations" element={<AdminDonations />} />
                   <Route path="users" element={<AdminUsers />} />
                   <Route path="notices" element={<AdminNotices />} />
-                  <Route path="events" element={<AdminEvents />} />
+                  <Route path="gallery" element={<AdminGallery />} />                  
                   <Route path="messages" element={<AdminMessages />} />
                   <Route path="settings" element={<AdminSettings />} />
                 </Route>

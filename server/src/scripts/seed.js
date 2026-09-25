@@ -1,7 +1,7 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 import Notice from "../models/Notice.js";
-import Event from "../models/Event.js";
+
 
 const day = 24 * 60 * 60 * 1000;
 
@@ -23,22 +23,7 @@ const notices = [
   },
 ];
 
-const events = [
-  {
-    title: "সাপ্তাহিক দারস",
-    description: "কুরআন ও হাদিসের আলোকে সাপ্তাহিক আলোচনা। সবার জন্য উন্মুক্ত।",
-    date: new Date(Date.now() + 3 * day),
-    time: "এশার নামাজের পর",
-    place: "মসজিদ প্রাঙ্গণ",
-  },
-  {
-    title: "মাসিক দ্বীনি মাহফিল",
-    description: "বিশিষ্ট আলেমদের উপস্থিতিতে মাসিক মাহফিল ও দোয়া।",
-    date: new Date(Date.now() + 14 * day),
-    time: "বাদ মাগরিব",
-    place: "মসজিদ ও মাদ্রাসা প্রাঙ্গণ",
-  },
-];
+
 
 await mongoose.connect(process.env.MONGODB_URI);
 
