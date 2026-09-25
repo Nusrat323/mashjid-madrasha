@@ -1,10 +1,16 @@
 
 import Gallery from "../models/Gallery.js";
+import cloudinary from "../config/cloudinary.js";
 
-export const getGallery = async (req, res) => {
+export const getGallery = async (
+  req,
+  res
+) => {
   try {
-    const gallery = await Gallery.find()
-      .sort({ createdAt: -1 });
+    const gallery =
+      await Gallery.find().sort({
+        createdAt: -1,
+      });
 
     res.json(gallery);
   } catch (error) {
@@ -25,24 +31,51 @@ export const createGallery = async (
   res
 ) => {
   try {
-    const {
-      image,
-      title,
-      caption,
-    } = req.body;
-
-    if (!image?.trim()) {
+    if (!req.file) {
       return res.status(400).json({
         message:
-          "ছবির URL দিতে হবে",
+          "একটি ছবি নির্বাচন করুন",
       });
     }
 
-    const gallery = await Gallery.create({
-      image: image.trim(),
-      title: title?.trim() || "",
-      caption: caption?.trim() || "",
-    });
+    const file = req.file;
+
+    const uploadResult =
+      await new Promise(
+        (resolve, reject) => {
+          const uploadStream =
+            cloudinary.uploader.upload_stream(
+              {
+                folder:
+                  "kazibari-mashjid/gallery",
+
+                resource_type: "image",
+              },
+
+              (error, result) => {
+                if (error) {
+                  reject(error);
+                  return;
+                }
+
+                resolve(result);
+              }
+            );
+
+          uploadStream.end(
+            file.buffer
+          );
+        }
+      );
+
+    const gallery =
+      await Gallery.create({
+        image:
+          uploadResult.secure_url,
+
+        publicId:
+          uploadResult.public_id,
+      });
 
     res.status(201).json(gallery);
   } catch (error) {
@@ -53,7 +86,7 @@ export const createGallery = async (
 
     res.status(500).json({
       message:
-        "গ্যালারিতে ছবি যোগ করা যায়নি",
+        "গ্যালারিতে ছবি আপলোড করা যায়নি",
     });
   }
 };
@@ -75,6 +108,29 @@ export const deleteGallery = async (
       });
     }
 
+    /*
+      First delete the actual image
+      from Cloudinary.
+    */
+    try {
+      if (gallery.publicId) {
+        await cloudinary.uploader.destroy(
+          gallery.publicId,
+          {
+            resource_type: "image",
+          }
+        );
+      }
+    } catch (cloudinaryError) {
+      console.error(
+        "Cloudinary delete error:",
+        cloudinaryError
+      );
+    }
+
+    /*
+      Then delete the MongoDB record.
+    */
     await Gallery.findByIdAndDelete(
       req.params.id
     );
@@ -95,4 +151,6 @@ export const deleteGallery = async (
     });
   }
 };
+
+
 

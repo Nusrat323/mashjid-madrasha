@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Field, inputClass } from "../../components/Field.jsx";
@@ -16,8 +17,13 @@ const prayerFields = [
 function Card({ title, children }) {
   return (
     <div className="space-y-4 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
-      <h2 className="font-display text-lg font-bold text-indigo-950">{title}</h2>
-      <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+      <h2 className="font-display text-lg font-bold text-indigo-950">
+        {title}
+      </h2>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {children}
+      </div>
     </div>
   );
 }
@@ -31,14 +37,25 @@ export default function AdminSettings() {
     setForm(settings);
   }, [settings]);
 
-  const set = (name, value) => setForm((current) => ({ ...current, [name]: value }));
+  const set = (name, value) =>
+    setForm((current) => ({
+      ...current,
+      [name]: value,
+    }));
 
   const setPrayer = (name, value) =>
-    setForm((current) => ({ ...current, prayerTimes: { ...current.prayerTimes, [name]: value } }));
+    setForm((current) => ({
+      ...current,
+      prayerTimes: {
+        ...current.prayerTimes,
+        [name]: value,
+      },
+    }));
 
   const save = async (event) => {
     event.preventDefault();
     setSaving(true);
+
     try {
       await api.put("/settings", form, true);
       await loadSettings();
@@ -52,27 +69,40 @@ export default function AdminSettings() {
 
   const textField = (name, label, placeholder = "") => (
     <Field label={label}>
-      <input value={form[name] || ""} onChange={(e) => set(name, e.target.value)} className={inputClass} placeholder={placeholder} />
+      <input
+        value={form[name] || ""}
+        onChange={(e) => set(name, e.target.value)}
+        className={inputClass}
+        placeholder={placeholder}
+      />
     </Field>
   );
 
   return (
     <form onSubmit={save} className="max-w-4xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-bold text-indigo-950">সাইট সেটিংস</h1>
-        <p className="text-sm text-slate-500">এখানে দেওয়া তথ্য পুরো ওয়েবসাইটে দেখানো হবে</p>
+        <h1 className="font-display text-2xl font-bold text-indigo-950">
+          সাইট সেটিংস
+        </h1>
+
+        <p className="text-sm text-slate-500">
+          এখানে দেওয়া তথ্য পুরো ওয়েবসাইটে দেখানো হবে
+        </p>
       </div>
 
       <Card title="যোগাযোগের তথ্য">
         {textField("phone", "ফোন নম্বর", "01XXXXXXXXX")}
         {textField("email", "ইমেইল")}
-        <div className="sm:col-span-2">{textField("address", "ঠিকানা")}</div>
       </Card>
 
       <Card title="জামাতের সময়সূচি">
         {prayerFields.map(([key, label]) => (
           <Field key={key} label={label}>
-            <input value={form.prayerTimes?.[key] || ""} onChange={(e) => setPrayer(key, e.target.value)} className={inputClass} />
+            <input
+              value={form.prayerTimes?.[key] || ""}
+              onChange={(e) => setPrayer(key, e.target.value)}
+              className={inputClass}
+            />
           </Field>
         ))}
       </Card>
@@ -98,3 +128,4 @@ export default function AdminSettings() {
     </form>
   );
 }
+

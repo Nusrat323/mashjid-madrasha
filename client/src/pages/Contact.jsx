@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {
@@ -10,6 +11,7 @@ import PageHeader from "../components/PageHeader.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { Field, inputClass } from "../components/Field.jsx";
 import { api } from "../lib/api.js";
+import { useSettings } from "../context/SettingsContext.jsx";
 
 const emptyForm = {
   name: "",
@@ -19,6 +21,8 @@ const emptyForm = {
 };
 
 export default function Contact() {
+  const { settings } = useSettings();
+
   const [form, setForm] = useState(emptyForm);
   const [sending, setSending] = useState(false);
 
@@ -27,6 +31,9 @@ export default function Contact() {
       ...current,
       [name]: value,
     }));
+
+  const phone = settings?.phone || "";
+  const email = settings?.email || "";
 
   const contactItems = [
     {
@@ -37,14 +44,14 @@ export default function Contact() {
     {
       icon: FaPhoneAlt,
       label: "ফোন",
-      value: "+880 1700-000000",
-      href: "tel:+8801700000000",
+      value: phone,
+      href: phone ? `tel:${phone.replace(/\s+/g, "")}` : undefined,
     },
     {
       icon: FaEnvelope,
       label: "ইমেইল",
-      value: "info@paikparakazialfazuddinmosjid.com",
-      href: "mailto:info@paikparakazialfazuddinmosjid.com",
+      value: email,
+      href: email ? `mailto:${email}` : undefined,
     },
   ];
 
@@ -180,3 +187,4 @@ export default function Contact() {
     </>
   );
 }
+

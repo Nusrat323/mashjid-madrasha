@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import {
   FaMapMarkerAlt,
@@ -10,14 +11,19 @@ import Pattern from "./Pattern.jsx";
 import Reveal from "./Reveal.jsx";
 import { navLinks } from "../data/site.js";
 import { currentYear } from "../lib/format.js";
+import { useSettings } from "../context/SettingsContext.jsx";
 
 export default function Footer() {
+  const { settings } = useSettings();
+
+  const phone = settings?.phone || "";
+  const email = settings?.email || "";
+
   return (
     <footer className="relative overflow-hidden bg-indigo-950 text-indigo-100">
       <Pattern className="text-white/5" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        
         <Reveal>
           <h2 className="font-display text-lg font-bold leading-8 text-white">
             পাইকপাড়া কাজী আলফাজউদ্দীন জামে মসজিদ
@@ -29,7 +35,6 @@ export default function Footer() {
           </p>
         </Reveal>
 
-       
         <Reveal delay={0.1}>
           <h3 className="mb-4 font-display text-lg font-bold text-white">
             গুরুত্বপূর্ণ লিংক
@@ -49,14 +54,12 @@ export default function Footer() {
           </ul>
         </Reveal>
 
-        
         <Reveal delay={0.2}>
           <h3 className="mb-4 font-display text-lg font-bold text-white">
             যোগাযোগ
           </h3>
 
           <ul className="space-y-4 text-sm">
-            
             <li className="flex gap-3">
               <FaMapMarkerAlt className="mt-1 shrink-0 text-amber-400" />
 
@@ -65,33 +68,34 @@ export default function Footer() {
               </span>
             </li>
 
-            
             <li className="flex gap-3">
               <FaPhoneAlt className="mt-1 shrink-0 text-amber-400" />
 
               <a
-                href="tel:+8801700000000"
+                href={
+                  phone
+                    ? `tel:${phone.replace(/\s+/g, "")}`
+                    : "#"
+                }
                 className="text-indigo-200 transition-colors hover:text-amber-300"
               >
-                +880 1700-000000
+                {phone}
               </a>
             </li>
 
-            
             <li className="flex gap-3">
               <FaEnvelope className="mt-1 shrink-0 text-amber-400" />
 
               <a
-                href="mailto:info@paikparakazialfazuddinmosjid.com"
+                href={email ? `mailto:${email}` : "#"}
                 className="break-all text-indigo-200 transition-colors hover:text-amber-300"
               >
-                info@paikparakazialfazuddinmosjid.com
+                {email}
               </a>
             </li>
           </ul>
         </Reveal>
 
-        
         <Reveal delay={0.3}>
           <h3 className="mb-4 font-display text-lg font-bold text-white">
             সদকায়ে জারিয়া
@@ -111,11 +115,10 @@ export default function Footer() {
         </Reveal>
       </div>
 
-     
       <div className="relative border-t border-white/10 py-5 text-center text-sm text-indigo-300">
-        © {currentYear()} পাইকপাড়া কাজী আলফাজউদ্দীন জামে মসজিদ। সর্বস্বত্ব
-        সংরক্ষিত।
+        © {currentYear()} পাইকপাড়া কাজী আলফাজউদ্দীন জামে মসজিদ
       </div>
     </footer>
   );
 }
+

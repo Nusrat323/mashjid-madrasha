@@ -18,14 +18,13 @@ import Pattern from "../components/Pattern.jsx";
 import { departments } from "../data/site.js";
 import madrashaImage from "../assets/g1.png";
 import madrashaImage2 from "../assets/g10.JPG";
+import chatrabashImage from "../assets/g11.JPG";
 
 export default function Madrasha() {
   return (
     <>
-      
       <section className="relative overflow-hidden bg-slate-100">
         <div className="mx-auto grid max-w-7xl lg:min-h-[480px] lg:grid-cols-2">
-          
           <motion.div
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -41,7 +40,6 @@ export default function Madrasha() {
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/30 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:to-slate-100/20" />
           </motion.div>
 
-          
           <div className="order-2 flex items-center px-5 py-14 sm:px-8 sm:py-16 lg:order-1 lg:px-12 lg:py-20">
             <motion.div
               initial={{ opacity: 0, x: -25 }}
@@ -86,7 +84,6 @@ export default function Madrasha() {
         </div>
       </section>
 
-      
       <section className="bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
           <Reveal from="left">
@@ -129,8 +126,73 @@ export default function Madrasha() {
         </div>
       </section>
 
-      
       <section className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+          <Reveal from="left">
+            <div className="max-w-xl">
+              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">
+                ছাত্রাবাস
+              </span>
+
+              <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-indigo-950 sm:text-4xl">
+                শিক্ষার্থীদের জন্য নিরাপদ ও সুন্দর আবাসিক পরিবেশ
+              </h2>
+
+              <div className="mt-5 h-1 w-14 rounded-full bg-amber-400" />
+
+              <p className="mt-6 text-lg leading-8 text-slate-600">
+                দূর-দূরান্ত থেকে আসা শিক্ষার্থীদের পড়াশোনা ও দ্বীনি
+                শিক্ষার ধারাবাহিকতা বজায় রাখতে ছাত্রাবাস একটি
+                গুরুত্বপূর্ণ সুবিধা। এখানে শিক্ষার্থীরা পড়াশোনার
+                পাশাপাশি একসঙ্গে থেকে শৃঙ্খলা, দায়িত্ববোধ ও পারস্পরিক
+                সহযোগিতার মতো মূল্যবোধ শেখার সুযোগ পায়।
+              </p>
+
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                একটি সুন্দর ও শান্ত পরিবেশে শিক্ষার্থীদের দৈনন্দিন
+                পড়াশোনা, ইবাদত এবং প্রয়োজনীয় সময় কাটানোর সুযোগ তৈরি
+                করাই ছাত্রাবাস ব্যবস্থার অন্যতম উদ্দেশ্য।
+              </p>
+
+              <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <h3 className="font-display text-lg font-bold text-indigo-950">
+                    আবাসিক সুবিধা
+                  </h3>
+
+                  <p className="mt-2 leading-6 text-slate-600">
+                    দূরবর্তী এলাকার শিক্ষার্থীদের থাকার জন্য প্রয়োজনীয়
+                    আবাসিক পরিবেশ।
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <h3 className="font-display text-lg font-bold text-indigo-950">
+                    সুন্দর পরিবেশ
+                  </h3>
+
+                  <p className="mt-2 leading-6 text-slate-600">
+                    পড়াশোনা, ইবাদত ও দৈনন্দিন জীবনযাপনের জন্য শান্ত
+                    ও সুশৃঙ্খল পরিবেশ।
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal from="right">
+            <div className="relative overflow-hidden rounded-[1.5rem]">
+              <img
+                src={chatrabashImage}
+                alt="মাদ্রাসার ছাত্রাবাস"
+                className="h-[400px] w-full object-cover transition duration-700 hover:scale-105 sm:h-[480px]"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             badge="শিক্ষার উদ্দেশ্য"
@@ -164,9 +226,9 @@ export default function Madrasha() {
               <Reveal key={title} delay={index * 0.08}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  className="h-full rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-xl hover:shadow-indigo-900/10"
+                  className="h-full rounded-2xl border border-slate-200 bg-slate-50 p-7 shadow-sm transition-shadow hover:shadow-lg hover:shadow-indigo-900/10"
                 >
-                  <span className="grid size-14 place-items-center rounded-2xl bg-indigo-900 text-xl text-amber-300">
+                  <span className="grid size-14 place-items-center rounded-xl bg-indigo-900 text-xl text-amber-300">
                     <Icon />
                   </span>
 
@@ -184,7 +246,6 @@ export default function Madrasha() {
         </div>
       </section>
 
-      
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <SectionTitle
           badge="শিক্ষা বিভাগ"
@@ -194,15 +255,12 @@ export default function Madrasha() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {departments.map(({ icon: Icon, title, text }, index) => (
-            <Reveal
-              key={title}
-              delay={(index % 2) * 0.12}
-            >
+            <Reveal key={title} delay={(index % 2) * 0.12}>
               <motion.div
                 whileHover={{ y: -6 }}
-                className="h-full rounded-3xl border border-slate-200 bg-white p-8 transition-shadow hover:shadow-xl hover:shadow-indigo-900/10"
+                className="h-full rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-shadow hover:shadow-lg hover:shadow-indigo-900/10"
               >
-                <span className="grid size-16 place-items-center rounded-2xl bg-indigo-900 text-2xl text-amber-300">
+                <span className="grid size-16 place-items-center rounded-xl bg-indigo-900 text-2xl text-amber-300">
                   <Icon />
                 </span>
 
@@ -219,7 +277,6 @@ export default function Madrasha() {
         </div>
       </section>
 
-      
       <section className="bg-indigo-50 px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal from="left">
@@ -249,7 +306,7 @@ export default function Madrasha() {
           </Reveal>
 
           <Reveal from="right">
-            <div className="rounded-[2rem] bg-white p-7 shadow-sm sm:p-9">
+            <div className="rounded-2xl bg-white p-7 shadow-sm sm:p-9">
               <div className="grid gap-5">
                 {[
                   {
@@ -270,9 +327,9 @@ export default function Madrasha() {
                 ].map(({ icon: Icon, title, text }) => (
                   <div
                     key={title}
-                    className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-5"
+                    className="flex gap-4 rounded-xl border border-slate-100 bg-slate-50 p-5"
                   >
-                    <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-indigo-900 text-amber-300">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-indigo-900 text-amber-300">
                       <Icon />
                     </span>
 
@@ -293,9 +350,8 @@ export default function Madrasha() {
         </div>
       </section>
 
-      
       <section className="px-4 pb-24 pt-20 sm:px-6 lg:px-8">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-gradient-to-br from-indigo-900 to-indigo-950 p-8 text-white sm:p-14">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-indigo-900 to-indigo-950 p-8 text-white sm:p-14">
           <Pattern className="text-white/5" />
 
           <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -342,3 +398,4 @@ export default function Madrasha() {
     </>
   );
 }
+

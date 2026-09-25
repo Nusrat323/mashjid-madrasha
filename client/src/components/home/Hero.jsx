@@ -33,14 +33,24 @@ export default function Hero() {
       <Pattern className="-z-10 text-white/5" />
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div variants={container} initial="hidden" animate="show" className="max-w-2xl">
-          <motion.span
-            variants={item}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-sm font-medium text-amber-200 backdrop-blur"
-          >
-            <span className="size-2 animate-pulse rounded-full bg-amber-400" />
-            বিসমিল্লাহির রাহমানির রাহীম
-          </motion.span>
+      <motion.div
+  variants={container}
+  initial="hidden"
+  animate="show"
+  className="max-w-2xl"
+>
+  <motion.div
+    variants={item}
+    className="flex items-center gap-3 text-sm font-medium tracking-wide text-amber-200"
+  >
+    <span className="h-px w-8 bg-amber-300/60" />
+
+    <span className="font-display">
+      বিসমিল্লাহির রাহমানির রাহীম
+    </span>
+
+    <span className="h-px w-8 bg-amber-300/60" />
+  </motion.div>
 
           <motion.h1
             variants={item}
@@ -61,7 +71,7 @@ export default function Hero() {
               <FaHandHoldingHeart /> দান করুন
             </Link>
             <Link
-              to="/madrasha"
+              to="/about"
               className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-7 py-3.5 text-lg font-medium text-white backdrop-blur transition hover:bg-white/20"
             >
               মাদ্রাসা সম্পর্কে জানুন <FaArrowRight className="text-sm" />

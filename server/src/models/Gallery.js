@@ -1,40 +1,32 @@
 
 import mongoose from "mongoose";
 
-const gallerySchema = new mongoose.Schema(
-  {
-    image: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+const gallerySchema =
+  new mongoose.Schema(
+    {
+      image: {
+        type: String,
+        required: true,
+        trim: true,
+      },
 
-    title: {
-      type: String,
-      trim: true,
-      default: "",
+      publicId: {
+        type: String,
+        required: true,
+        trim: true,
+      },
     },
+    {
+      timestamps: true,
+    }
+  );
 
-    caption: {
-      type: String,
-      trim: true,
-      default: "",
-    },
-
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const Gallery = mongoose.model(
-  "Gallery",
-  gallerySchema
-);
+const Gallery =
+  mongoose.model(
+    "Gallery",
+    gallerySchema
+  );
 
 export default Gallery;
+
 

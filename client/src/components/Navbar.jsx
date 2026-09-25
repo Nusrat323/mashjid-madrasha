@@ -29,11 +29,11 @@ export default function Navbar() {
 
   const navbarRef = useRef(null);
   const profileRef = useRef(null);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
 
-      
       setMenuOpen(false);
     };
 
@@ -46,7 +46,6 @@ export default function Navbar() {
     };
   }, []);
 
-  
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -75,7 +74,6 @@ export default function Navbar() {
     };
   }, []);
 
-  
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -91,19 +89,16 @@ export default function Navbar() {
     };
   }, []);
 
-  
   const closeAll = () => {
     setMenuOpen(false);
     setProfileOpen(false);
   };
 
-  
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
     setProfileOpen(false);
   };
 
-  
   const handleLogout = async () => {
     closeAll();
     await logout();
@@ -118,10 +113,7 @@ export default function Navbar() {
           : "border-transparent bg-white"
       }`}
     >
-      
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:h-20 lg:px-8 lg:py-0">
-
-        
         <Link
           to="/"
           onClick={closeAll}
@@ -132,7 +124,6 @@ export default function Navbar() {
           </p>
         </Link>
 
-        
         <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((item) => (
             <NavLink
@@ -157,10 +148,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-       
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-
-          
           <Link
             to="/donate"
             onClick={closeAll}
@@ -170,7 +158,6 @@ export default function Navbar() {
             দান করুন
           </Link>
 
-         
           {user ? (
             <div
               ref={profileRef}
@@ -203,7 +190,6 @@ export default function Navbar() {
                 </span>
               </button>
 
-             
               <AnimatePresence>
                 {profileOpen && (
                   <motion.div
@@ -235,20 +221,22 @@ export default function Navbar() {
                       </p>
                     </div>
 
-                    <Link
-                      to="/dashboard"
-                      onClick={closeAll}
-                      className="mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-slate-700 transition hover:bg-indigo-50"
-                    >
-                      <FaUserCircle className="text-indigo-500" />
-                      আমার দান ও প্রোফাইল
-                    </Link>
+                    {!isAdmin && (
+                      <Link
+                        to="/dashboard"
+                        onClick={closeAll}
+                        className="mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-slate-700 transition hover:bg-indigo-50"
+                      >
+                        <FaUserCircle className="text-indigo-500" />
+                        আমার দান ও প্রোফাইল
+                      </Link>
+                    )}
 
                     {isAdmin && (
                       <Link
                         to="/admin"
                         onClick={closeAll}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-slate-700 transition hover:bg-indigo-50"
+                        className="mt-1 flex items-center gap-3 rounded-xl px-3 py-2.5 text-slate-700 transition hover:bg-indigo-50"
                       >
                         <FaTachometerAlt className="text-indigo-500" />
                         অ্যাডমিন প্যানেল
@@ -268,7 +256,6 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
           ) : (
-           
             <Link
               to="/login"
               onClick={closeAll}
@@ -278,7 +265,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          
           <button
             type="button"
             onClick={toggleMenu}
@@ -295,7 +281,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      
       <AnimatePresence initial={false}>
         {menuOpen && (
           <motion.div
@@ -318,8 +303,6 @@ export default function Navbar() {
             className="border-t border-slate-100 bg-white shadow-lg lg:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
-
-              
               {navLinks.map((item) => (
                 <NavLink
                   key={item.to}
@@ -338,7 +321,6 @@ export default function Navbar() {
                 </NavLink>
               ))}
 
-              
               <Link
                 to="/donate"
                 onClick={closeAll}
@@ -348,7 +330,6 @@ export default function Navbar() {
                 দান করুন
               </Link>
 
-              
               {!user && (
                 <Link
                   to="/login"
@@ -359,18 +340,18 @@ export default function Navbar() {
                 </Link>
               )}
 
-              
               {user && (
                 <div className="mt-2 border-t border-slate-100 pt-2">
-
-                  <Link
-                    to="/dashboard"
-                    onClick={closeAll}
-                    className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium text-slate-700 transition hover:bg-indigo-50"
-                  >
-                    <FaUserCircle className="text-indigo-500" />
-                    আমার দান ও প্রোফাইল
-                  </Link>
+                  {!isAdmin && (
+                    <Link
+                      to="/dashboard"
+                      onClick={closeAll}
+                      className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium text-slate-700 transition hover:bg-indigo-50"
+                    >
+                      <FaUserCircle className="text-indigo-500" />
+                      আমার দান ও প্রোফাইল
+                    </Link>
+                  )}
 
                   {isAdmin && (
                     <Link
