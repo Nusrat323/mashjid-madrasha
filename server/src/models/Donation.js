@@ -2,28 +2,88 @@ import mongoose from "mongoose";
 
 const donationSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    donorName: { type: String, required: true, trim: true },
-    donorEmail: { type: String, default: "", trim: true },
-    phone: { type: String, default: "", trim: true },
-    amount: { type: Number, required: true, min: 10 },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    donorName: {
+      type: String,
+      required: true,
+    },
+
+    donorEmail: {
+      type: String,
+      required: true,
+    },
+
+    amount: {
+      type: Number,
+      required: true,
+    },
+
     purpose: {
       type: String,
-      enum: ["general", "madrasha", "construction", "orphan", "zakat", "sadaqah"],
-      default: "general",
+      required: true,
     },
-    method: { type: String, enum: ["bkash", "nagad", "bank"], required: true },
-    senderNumber: { type: String, default: "", trim: true },
-    transactionId: { type: String, default: "", trim: true },
-    paymentId: { type: String, default: "" },
-    status: { type: String, enum: ["pending", "completed", "rejected"], default: "pending" },
-    isAnonymous: { type: Boolean, default: false },
-    note: { type: String, default: "", trim: true },
+
+    method: {
+      type: String,
+      required: true,
+    },
+
+    phone: {
+      type: String,
+    },
+
+    senderNumber: {
+      type: String,
+    },
+
+    transactionId: {
+      type: String,
+    },
+
+    paymentId: {
+      type: String,
+    },
+
+    isAnonymous: {
+      type: Boolean,
+      default: false,
+    },
+
+    note: {
+      type: String,
+    },
+
+    status: {
+      type: String,
+      enum: [
+        "pending",
+        "completed",
+        "rejected",
+      ],
+      default: "pending",
+    },
+
+    userDeleted: {
+      type: Boolean,
+      default: false,
+    },
+
+    adminDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-donationSchema.index({ createdAt: -1 });
-donationSchema.index({ status: 1 });
-
-export default mongoose.model("Donation", donationSchema);
+export default mongoose.model(
+  "Donation",
+  donationSchema
+);

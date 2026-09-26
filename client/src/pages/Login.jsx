@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -18,6 +17,7 @@ import { authErrorMessage } from "../lib/authErrors.js";
 export default function Login() {
   const {
     user,
+    isAdmin,
     login,
     register,
     loginWithGoogle,
@@ -26,7 +26,8 @@ export default function Login() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const redirectTo = location.state?.from || "/dashboard";
+
+  const redirectTo = location.state?.from || "/";
 
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({
@@ -40,8 +41,14 @@ export default function Login() {
   const [forgotPassword, setForgotPassword] = useState(false);
 
   useEffect(() => {
-    if (user) navigate(redirectTo, { replace: true });
-  }, [user, redirectTo, navigate]);
+    if (user) {
+      if (isAdmin) {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate(redirectTo, { replace: true });
+      }
+    }
+  }, [user, isAdmin, redirectTo, navigate]);
 
   const set = (name, value) =>
     setForm((current) => ({
@@ -265,7 +272,11 @@ export default function Login() {
                   <div className="relative">
                     <input
                       required
-                      type={showPassword ? "text" : "password"}
+                      type={
+                        showPassword
+                          ? "text"
+                          : "password"
+                      }
                       minLength={6}
                       value={form.password}
                       onChange={(e) =>
@@ -278,7 +289,9 @@ export default function Login() {
                     <button
                       type="button"
                       onClick={() =>
-                        setShowPassword((current) => !current)
+                        setShowPassword(
+                          (current) => !current
+                        )
                       }
                       aria-label={
                         showPassword
@@ -300,7 +313,9 @@ export default function Login() {
                   <div className="flex justify-end">
                     <button
                       type="button"
-                      onClick={() => setForgotPassword(true)}
+                      onClick={() =>
+                        setForgotPassword(true)
+                      }
                       className="text-sm font-medium text-indigo-700 transition hover:text-indigo-900 hover:underline"
                     >
                       পাসওয়ার্ড ভুলে গেছেন?

@@ -1,4 +1,3 @@
-
 import {
   createContext,
   useContext,
@@ -16,6 +15,8 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+
+import toast from "react-hot-toast";
 
 import { auth, googleProvider } from "../firebase.js";
 import { api } from "../lib/api.js";
@@ -69,7 +70,7 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  // Email + Password Login
+  
   const login = async (email, password) => {
     const credential = await signInWithEmailAndPassword(
       auth,
@@ -77,20 +78,23 @@ export function AuthProvider({ children }) {
       password
     );
 
+    toast.success("সফলভাবে লগইন করা হয়েছে");
+
     return credential;
   };
 
-  // Google Login
+  
   const loginWithGoogle = async () => {
     const result = await signInWithPopup(
       auth,
       googleProvider
     );
 
+    toast.success("সফলভাবে লগইন করা হয়েছে");
+
     return result;
   };
 
-  // Email + Password Registration
   const register = async (name, email, password) => {
     registering.current = true;
 
@@ -116,6 +120,8 @@ export function AuthProvider({ children }) {
 
       setUser(syncedUser);
 
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে");
+
       return credential;
     } catch (error) {
       console.error("Registration failed:", error);
@@ -125,15 +131,17 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Forgot Password
+  
   const resetPassword = async (email) => {
     await sendPasswordResetEmail(auth, email);
   };
 
-  // Logout
+ 
   const logout = async () => {
     await signOut(auth);
     setUser(null);
+
+    toast.success("সফলভাবে লগআউট করা হয়েছে");
   };
 
   const value = {
